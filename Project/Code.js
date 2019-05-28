@@ -1,18 +1,28 @@
-sendButton.onclick =  function() {
+"use strict";
+ function calcMinSum() {
     var mas = document.getElementById("array").value;
-    var arr = mas.split(',');
-    var min = parseInt(arr[0],10);
-    var min2 = 0;
+    var elementValue =  minimumSum(mas);
 
-    if (arr.length === 1 && arr[0] === "") {
-        alert('введите данные');
+    if(isNaN(elementValue)){
+        alert("Введите числа через запятую");
         return;
     }
+
+    document.getElementById("sum").value = elementValue;
+}
+
+function minimumSum(string) {
+    var arr = string.split(',');
+    var min = parseInt(arr[0], 10);
+    var min2 = arr.length === 1 ? 0 : Number.MAX_SAFE_INTEGER;
+
     for (var i = 1; i < arr.length; i++) {
         if (arr[i] <= min) {
             min2 = min;
             min = parseInt(arr[i],10);
+        } else if (arr[i] < min2) {
+            min2 = parseInt(arr[i], 10)
         }
     }
-document.getElementById("sum").value = min+min2;
-};
+    return min + min2;
+}
